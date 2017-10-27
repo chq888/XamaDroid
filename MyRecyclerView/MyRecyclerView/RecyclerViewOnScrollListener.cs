@@ -15,19 +15,25 @@ namespace MyRecyclerView
 {
     public class RecyclerViewOnScrollListener : RecyclerView.OnScrollListener
     {
-
         public delegate void LoadMoreEventHandler(object sender, EventArgs e);
         public event LoadMoreEventHandler LoadMoreEvent;
 
-        private LinearLayoutManager layoutManager;
+        private LinearLayoutManager linearLayoutManager;
         private int lastVisibleItem, totalItemCount;
         private bool loading;
-        private int visibleThreshold = 5;
+        bool isMoreDataAvailable = true;
 
+        //// The minimum amount of items to have below your current scroll position before loading more.
+        private int visibleThreshold = 5;
 
         public RecyclerViewOnScrollListener(LinearLayoutManager layoutManager)
         {
-            this.layoutManager = layoutManager;
+            linearLayoutManager = layoutManager;
+        }
+
+        public void SetMoreDataAvailable(bool moreDataAvailable)
+        {
+            isMoreDataAvailable = moreDataAvailable;
         }
 
         //public void onScrolled(RecyclerView recyclerView,
@@ -52,34 +58,45 @@ namespace MyRecyclerView
         //      }
         //  });
 
+
+        public void SetLoaded()
+        {
+            loading = false;
+        }
+
+
         public override void OnScrolled(RecyclerView recyclerView, int dx, int dy)
         {
             base.OnScrolled(recyclerView, dx, dy);
 
-            var visibleItemCount = recyclerView.ChildCount;
-            var totalItemCount = recyclerView.GetAdapter().ItemCount;
-            var pastVisiblesItems = layoutManager.FindFirstVisibleItemPosition();
+            //var visibleItemCount = recyclerView.ChildCount;
+            //var totalItemCount = recyclerView.GetAdapter().ItemCount;
+            //var pastVisiblesItems = LayoutManager.FindFirstVisibleItemPosition();
 
-            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount)
+            //if ((visibleItemCount + pastVisiblesItems) >= totalItemCount)
+            //{
+            //    LoadMoreEvent(this, null);
+            //    loading = true;
+            //}
+
+
+
+            totalItemCount = linearLayoutManager.ItemCount;
+            lastVisibleItem = linearLayoutManager.FindLastVisibleItemPosition();
+
+            //if (position >= getItemCount() - 1 && isMoreDataAvailable && !isLoading && loadMoreListener != null)
+            //{
+            //    isLoading = true;
+            //    loadMoreListener.onLoadMore();
+            //}
+
+            if (LoadMoreEvent != null && isMoreDataAvailable && !loading && totalItemCount <= (lastVisibleItem + visibleThreshold))
             {
                 LoadMoreEvent(this, null);
+
                 loading = true;
             }
 
-            //totalItemCount = LayoutManager.ItemCount;
-            //lastVisibleItem = LayoutManager.FindLastVisibleItemPosition();
-            //if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold))
-            //{
-            //    // End has been reached
-            //    // Do something
-            //    if (LoadMoreEvent != null)
-            //    {
-            //        LoadMoreEvent(this, null);
-            //    }
-
-            //    loading = true;
-            //}
         }
-
     }
 }

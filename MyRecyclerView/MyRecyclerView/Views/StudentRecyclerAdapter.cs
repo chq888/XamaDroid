@@ -13,13 +13,7 @@ using Android.Support.V7.Widget;
 
 namespace MyRecyclerView.Views
 {
-
-    public interface IOnLoadMoreListener
-    {
-        void onLoadMore();
-    }
-
-
+    
     public class StudentRecyclerAdapter : SimpleRecycleViewAdapterBase
     {
         private const int VIEW_ITEM = 1;
@@ -28,12 +22,7 @@ namespace MyRecyclerView.Views
         private Activity _activity;
         private List<Student> _list;
 
-        //// The minimum amount of items to have below your current scroll position
-        //// before loading more.
-        //private int visibleThreshold = 5;
-        //private int lastVisibleItem, totalItemCount;
-        //private bool loading;
-        //private OnLoadMoreListener onLoadMoreListener;
+
 
         public StudentRecyclerAdapter(Activity activity, List<Student> list)
         {
@@ -97,7 +86,7 @@ namespace MyRecyclerView.Views
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            RecyclerView.ViewHolder vh;
+            RecyclerView.ViewHolder vh = null;
 
             if (viewType == VIEW_ITEM)
             {
@@ -105,7 +94,7 @@ namespace MyRecyclerView.Views
 
                 vh = new StudentViewHolder(view);
             }
-            else
+            else if (viewType == VIEW_PROG)
             {
                 View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.progressbar_more, parent, false);
                 vh = new ProgressViewHolder(view);
@@ -126,7 +115,6 @@ namespace MyRecyclerView.Views
         {
             return _list[position] != null ? VIEW_ITEM : VIEW_PROG;
         }
-
 
         //public void setLoaded()
         //{
@@ -187,7 +175,8 @@ namespace MyRecyclerView.Views
         //      public StudentViewHolder(View v)
         //      {
         //          super(v);
-        
+
+
         //          v.setOnClickListener(new OnClickListener() {
 
         //  @Override
@@ -209,5 +198,4 @@ namespace MyRecyclerView.Views
         }
 
     }
-
 }
