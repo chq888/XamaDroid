@@ -19,6 +19,7 @@ namespace MyRecyclerView.Views
         void onLoadMore();
     }
 
+
     public class StudentRecyclerAdapter : SimpleRecycleViewAdapterBase
     {
         private const int VIEW_ITEM = 1;
@@ -186,8 +187,7 @@ namespace MyRecyclerView.Views
         //      public StudentViewHolder(View v)
         //      {
         //          super(v);
-
-
+        
         //          v.setOnClickListener(new OnClickListener() {
 
         //  @Override
@@ -209,4 +209,5 @@ namespace MyRecyclerView.Views
         }
 
     }
+
 }

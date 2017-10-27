@@ -15,17 +15,19 @@ namespace MyRecyclerView
 {
     public class RecyclerViewOnScrollListener : RecyclerView.OnScrollListener
     {
+
         public delegate void LoadMoreEventHandler(object sender, EventArgs e);
         public event LoadMoreEventHandler LoadMoreEvent;
 
-        private LinearLayoutManager LayoutManager;
+        private LinearLayoutManager layoutManager;
         private int lastVisibleItem, totalItemCount;
         private bool loading;
         private int visibleThreshold = 5;
 
+
         public RecyclerViewOnScrollListener(LinearLayoutManager layoutManager)
         {
-            LayoutManager = layoutManager;
+            this.layoutManager = layoutManager;
         }
 
         //public void onScrolled(RecyclerView recyclerView,
@@ -56,14 +58,13 @@ namespace MyRecyclerView
 
             var visibleItemCount = recyclerView.ChildCount;
             var totalItemCount = recyclerView.GetAdapter().ItemCount;
-            var pastVisiblesItems = LayoutManager.FindFirstVisibleItemPosition();
+            var pastVisiblesItems = layoutManager.FindFirstVisibleItemPosition();
 
             if ((visibleItemCount + pastVisiblesItems) >= totalItemCount)
             {
                 LoadMoreEvent(this, null);
                 loading = true;
             }
-
 
             //totalItemCount = LayoutManager.ItemCount;
             //lastVisibleItem = LayoutManager.FindLastVisibleItemPosition();
@@ -78,8 +79,7 @@ namespace MyRecyclerView
 
             //    loading = true;
             //}
-
-
         }
+
     }
 }
