@@ -52,3 +52,5 @@ freeline/
 freeline_project_description.json
 /MyRecyclerView/packages
 /MyRecyclerView/MyRecyclerView/obj
+/MyRecyclerView/.vs/MyRecyclerView/v15/Server/sqlite3
+/MyRecyclerView/.vs/MyRecyclerView/v15/sqlite3
