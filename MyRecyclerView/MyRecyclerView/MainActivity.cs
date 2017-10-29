@@ -12,11 +12,14 @@ namespace MyRecyclerView
     {
 
         BottomNavigationView bottomNavigation;
+
+
         protected override void OnCreate(Bundle bundle)
         {
-
             base.OnCreate(bundle);
+
             SetContentView(Resource.Layout.main);
+
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             if (toolbar != null)
             {
@@ -28,7 +31,6 @@ namespace MyRecyclerView
 
             bottomNavigation = FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
 
-
             bottomNavigation.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
 
             LoadFragment(Resource.Id.menu_home);
@@ -39,7 +41,7 @@ namespace MyRecyclerView
             LoadFragment(e.Item.ItemId);
         }
 
-        void LoadFragment(int id)
+        private void LoadFragment(int id)
         {
             Android.Support.V4.App.Fragment fragment = null;
             switch (id)
@@ -61,6 +63,7 @@ namespace MyRecyclerView
                .Replace(Resource.Id.content_frame, fragment)
                .Commit();
         }
+
     }
 }
 

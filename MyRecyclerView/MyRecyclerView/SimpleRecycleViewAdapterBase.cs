@@ -27,6 +27,7 @@ namespace MyRecyclerView
 
     }
 
+
     public class SimpleRecycleViewAdapterBase : RecyclerView.Adapter
     {
 

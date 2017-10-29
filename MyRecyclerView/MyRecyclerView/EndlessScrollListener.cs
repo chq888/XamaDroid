@@ -14,37 +14,39 @@ namespace MyRecyclerView
 {
     public abstract class EndlessScrollListener : Java.Lang.Object, AbsListView.IOnScrollListener
     {
-    // The minimum number of items to have below your current scroll position
-    // before loading more.
-    private int visibleThreshold = 5;
-    // The current offset index of data you have loaded
-    private int currentPage = 0;
-    // The total number of items in the dataset after the last load
-    private int previousTotalItemCount = 0;
-    // True if we are still waiting for the last set of data to load.
-    private bool loading = true;
-    // Sets the starting page index
-    private int startingPageIndex = 0;
 
-    public EndlessScrollListener()
-    {
-    }
+        // The minimum number of items to have below your current scroll position
+        // before loading more.
+        private int visibleThreshold = 5;
+        // The current offset index of data you have loaded
+        private int currentPage = 0;
+        // The total number of items in the dataset after the last load
+        private int previousTotalItemCount = 0;
+        // True if we are still waiting for the last set of data to load.
+        private bool loading = true;
+        // Sets the starting page index
+        private int startingPageIndex = 0;
 
-    public EndlessScrollListener(int visibleThreshold)
-    {
-        this.visibleThreshold = visibleThreshold;
-    }
 
-    public EndlessScrollListener(int visibleThreshold, int startPage)
-    {
-        this.visibleThreshold = visibleThreshold;
-        this.startingPageIndex = startPage;
-        this.currentPage = startPage;
-    }
+        public EndlessScrollListener()
+        {
+        }
 
-    // Defines the process for actually loading more data based on page
-    // Returns true if more data is being loaded; returns false if there is no more data to load.
-    public abstract bool onLoadMore(int page, int totalItemsCount);
+        public EndlessScrollListener(int visibleThreshold)
+        {
+            this.visibleThreshold = visibleThreshold;
+        }
+
+        public EndlessScrollListener(int visibleThreshold, int startPage)
+        {
+            this.visibleThreshold = visibleThreshold;
+            this.startingPageIndex = startPage;
+            this.currentPage = startPage;
+        }
+
+        // Defines the process for actually loading more data based on page
+        // Returns true if more data is being loaded; returns false if there is no more data to load.
+        public abstract bool onLoadMore(int page, int totalItemsCount);
 
         public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
         {
@@ -111,7 +113,7 @@ namespace MyRecyclerView
 //    }
 //});
 //    }
-    
+
 
 //   // Append the next page of data into the adapter
 //   // This method probably sends out a network request and appends new data items to your adapter. 

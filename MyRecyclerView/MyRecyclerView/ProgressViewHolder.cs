@@ -15,11 +15,13 @@ namespace MyRecyclerView
 {
     public class ProgressViewHolder : RecyclerView.ViewHolder
     {
+
         public ProgressBar progressBar;
 
         public ProgressViewHolder(View v) : base(v)
         {
             progressBar = (ProgressBar)v.FindViewById(Resource.Id.progressbar_more);
         }
+
     }
 }
